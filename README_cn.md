@@ -44,7 +44,26 @@
     - `FLV`:`http://127.0.0.1:7001/{appname}/movie.flv`
     - `HLS`:`http://127.0.0.1:7002/{appname}/movie.m3u8`
 
-所有配置项: 
+接著可以透過[OBS Studio](https://obsproject.com/)，來指定串流地址 (您也可以透過ffmpeg)
+
+```
+OBS Studio的介面:
+
+設定 -> 串流
+    服務: 選擇自訂
+    伺服器: rtmp://127.0.0.1:1935/movie   // 注意movie是您自己打的room名稱，如果您的名稱是其他的就要放那個
+    串流金鑰: rfBd56ti4SMtYvSgD3xAV0YU12zampta7Z7S575KLkIZ9PYk  // 指的就是channelkey生成的一連串號碼
+```
+
+接著您可以加入要串流的影音來源，接著按下開始串流即可直播，
+
+至於觀眾要怎麼看到串流的內容，您可以透過flv.js來幫忙
+
+可以參考[test/flv.html](test/flv.html)
+
+----
+
+所有配置项:
 ```bash
 ./livego  -h
 Usage of ./livego:
@@ -65,3 +84,8 @@ Usage of ./livego:
 
 对Golang感兴趣？请看[Golang 中文学习资料汇总](http://go.wuhaolin.cn/)
 
+
+## 參考資料
+
+- [使用flv.js做直播](https://wuhaolin.cn/2017/05/17/%E4%BD%BF%E7%94%A8flv.js%E5%81%9A%E7%9B%B4%E6%92%AD/)
+- [基于开源的livego搭建直播服务器](http://www.upclzy.com/%E5%9F%BA%E4%BA%8E%E5%BC%80%E6%BA%90%E7%9A%84livego%E6%90%AD%E5%BB%BA%E7%9B%B4%E6%92%AD%E6%9C%8D%E5%8A%A1%E5%99%A8/)

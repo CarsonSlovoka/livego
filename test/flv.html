@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Live Streaming</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <script src="https://cdn.bootcss.com/flv.js/1.6.2/flv.min.js"></script>
+</head>
+
+<body>
+<video controls id="video" width="100%"></video>
+
+<input type="text" />
+<button type="button" id="load">Load</button>
+<script>
+  const appName = "live"
+  const roomName = "movie"
+  const button = document.querySelector('#load')
+  if (flvjs.isSupported()) {
+    button.addEventListener('click', function() {
+      const video = document.getElementById('video')
+      const target = document.querySelector('input').value
+      const flvPlayer = flvjs.createPlayer({
+        type: 'flv',
+        url: `http://127.0.0.1:7001/${appName}/${roomName}.flv`,
+      })
+      flvPlayer.attachMediaElement(video)
+      flvPlayer.load()
+      flvPlayer.play()
+    })
+  }
+</script>
+</body>
+</html>
