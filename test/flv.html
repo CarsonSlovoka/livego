@@ -1,29 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <title>Live Streaming</title>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <!-- <link rel="icon" href="favicon.ico" type="image/x-icon" /> -->
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
   <script src="https://cdn.bootcss.com/flv.js/1.6.2/flv.min.js"></script>
 </head>
 
-<body>
-<video controls id="video" width="100%"></video>
+<body style="background-image: url('orange.svg')">
+<div style="display:flex;margin:12.5% auto auto;justify-content: center;width:50%;height:50%">
+  <video id="video" width="100%" height="100%" controls></video>
+  <button type="button">Load</button>
+</div>
 
-<input type="text" />
-<button type="button" id="load">Load</button>
 <script>
   const appName = "live"
   const roomName = "movie"
-  const button = document.querySelector('#load')
+  const btn = document.querySelector('button')
   if (flvjs.isSupported()) {
-    button.addEventListener('click', function() {
+    btn.addEventListener('click', function () {
       const video = document.getElementById('video')
-      const target = document.querySelector('input').value
       const flvPlayer = flvjs.createPlayer({
         type: 'flv',
-        url: `http://127.0.0.1:7001/${appName}/${roomName}.flv`,
+        url: `http://127.0.0.1:7001/${appName}/${roomName}.flv`, // 這是本機 (只有自己電腦能測)
+        // url: `http://192.168.255.01:7001/${appName}/${roomName}.flv`, // 連內網要給私人ip才行 (區域網路都能測)
       })
       flvPlayer.attachMediaElement(video)
       flvPlayer.load()
