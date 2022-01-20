@@ -38,21 +38,22 @@
 ## 使用
 1. 启动服务：执行 `livego` 二进制文件启动 livego 服务；
 2. 访问 `http://localhost:8090/control/get?room=movie` 获取一个房间的 channelkey(channelkey用于推流，movie用于播放).
+   > 相同的room名稱，所產生出來的channelKey都是一樣的
 3. 推流: 通过`RTMP`协议推送视频流到地址 `rtmp://localhost:1935/{appname}/{channelkey}` (appname默认是`live`), 例如： 使用 `ffmpeg -re -i demo.flv -c copy -f flv rtmp://localhost:1935/{appname}/{channelkey}` 推流([下载demo flv](https://s3plus.meituan.net/v1/mss_7e425c4d9dcb4bb4918bbfa2779e6de1/mpack/default/demo.flv));
 4. 播放: 支持多种播放协议，播放地址如下:
-    - `RTMP`:`rtmp://localhost:1935/{appname}/movie`
+    - `RTMP`:`rtmp://localhost:1935/{appname}/movie`  <sup>movie就是以上8090 port所指定的room名稱，room=`movie` (可以置換成您想要的)</sup>
     - `FLV`:`http://127.0.0.1:7001/{appname}/movie.flv`
     - `HLS`:`http://127.0.0.1:7002/{appname}/movie.m3u8`
 
-接著可以透過[OBS Studio](https://obsproject.com/)，來指定串流地址 (您也可以透過ffmpeg)
+接著可以透過[OBS Studio](https://obsproject.com/)，來指定串流地址 (您也可以透過ffmpeg來**推**流)
 
 ```
 OBS Studio的介面:
 
 設定 -> 串流
     服務: 選擇自訂
-    伺服器: rtmp://127.0.0.1:1935/movie   // 注意movie是您自己打的room名稱，如果您的名稱是其他的就要放那個
-    串流金鑰: rfBd56ti4SMtYvSgD3xAV0YU12zampta7Z7S575KLkIZ9PYk  // 指的就是channelkey生成的一連串號碼
+    伺服器: rtmp://127.0.0.1:1935/appName   // appName預設live
+    串流金鑰: rfBd56ti4SMtYvSgD3xAV0YU12zampta7Z7S575KLkIZ9PYk  // 指的就是roomName所生成出來的channelkey號碼 (相同的rooName所產生出來的channelKey是一樣的)
 ```
 
 接著您可以加入要串流的影音來源，接著按下開始串流即可直播，
